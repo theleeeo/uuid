@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/google/uuid"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.design/x/clipboard"
 )
 
@@ -15,7 +17,14 @@ const (
 func main() {
 	printFn := getPrintFunction()
 
-	id := uuid.NewString()
+	var id string
+
+	if len(os.Args) > 1 && os.Args[1] == "mongo" {
+		id = primitive.NewObjectID().Hex()
+	} else {
+		id = uuid.NewString()
+	}
+
 	fmt.Println(id)
 
 	err := clipboard.Init()
