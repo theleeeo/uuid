@@ -1,4 +1,4 @@
-module lab/uuid
+module github.com/theleeeo/uuid
 
 go 1.19
 
